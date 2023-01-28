@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyPie Derby</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/edit_pie_style.css' %}">
+</head>
+<body>
+    <div id="header">
+        <a class="button" href="/dashboard">Pie Derby</a>
+        <a class="button" href="/logout">Logout</a>
+    </div>
+    <div id="add_col">
+        <h1>Edit {{ pie.name }}</h1>
+        <form action="/edit/pie" method="post">
+            {% csrf_token %}
+            <div id="inputs_container">
+                <div class="input_item">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" value="{{ pie.name }}">
+                </div>
+                <div class="input_item">
+                    <label for="filling">Filling:</label>
+                    <input type="text" name="filling" value="{{ pie.filling }}">
+                </div>
+                <div class="input_item">
+                    <label for="crust">Crust:</label>
+                    <input type="text" name="crust" value="{{ pie.crust }}">
+                </div>
+                <input type="hidden" name="pie_id" value="{{ pie.id }}">
+            </div>
+            <input type="submit" value="Edit Pie">
+        </form>
+    </div>
+</body>
+</html>

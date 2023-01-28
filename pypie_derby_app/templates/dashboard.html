@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyPie Derby</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_style.css' %}">
+</head>
+<body>
+    <div id="header">
+        <a class="button" href="/pies">Pie Derby</a>
+        <a class="button" href="/logout">Logout</a>
+    </div>
+    <div id="main_container">
+        <div id="pies_col">
+            <h1>PyPies by {{ user.first_name }}</h1>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>Action</td>
+                </tr>
+                {% for pie in pies %}
+                <tr>
+                    <td>{{ pie.name }}</td>
+                    <td>
+                        <a href="/edit/{{ pie.id }}">edit</a>
+                        <a href="/delete/{{ pie.id }}">delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div id="add_col">
+            <h1>Add New PyPie</h1>
+            <form action="/add/pie" method="post">
+                {% csrf_token %}
+                <div id="inputs_container">
+                    <div class="input_item">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name">
+                    </div>
+                    <div class="input_item">
+                        <label for="filling">Filling:</label>
+                        <input type="text" name="filling">
+                    </div>
+                    <div class="input_item">
+                        <label for="crust">Crust:</label>
+                        <input type="text" name="crust">
+                    </div>
+                </div>
+                <input type="submit" value="Add Pie">
+            </form>
+        </div>
+    </div>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+        <li class="error_msg" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

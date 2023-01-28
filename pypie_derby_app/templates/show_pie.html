@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyPie Derby</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/show_pie_style.css' %}">
+</head>
+<body>
+    <div id="header">
+        <a class="button" href="/dashboard">Pie Derby</a>
+        <a class="button" href="/logout">Logout</a>
+    </div>
+    <div id="main_container">
+        <h1>{{ pie.name }} by {{ pie.created_by.first_name }}</h1>
+        <p>{{ pie.filling }}</p>
+        <p>{{ pie.crust }}</p>
+        <p>Cast a Vote:</p>
+        {% if liked %}
+        <a class="button" href="/unvote/{{ pie.id }}">Yuck</a>
+        {% else %}
+        <a class="button" href="/vote/{{ pie.id }}">Yummy</a>
+        {% endif %}
+    </div>
+</body>
+</html>

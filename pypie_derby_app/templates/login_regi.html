@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyPie Derby</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login_regi_style.css' %}">
+</head>
+<body>
+    <div id="main_container">
+        <div id="regi_col">
+            <form action="/register" method="post">
+                {% csrf_token %}
+                <h1>Register</h1>
+                <div id="inputs_container">
+                    <div class="input_item">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" name="first_name">
+                    </div>
+                    <div class="input_item">
+                        <label for="last_name">Last Name:</label>
+                        <input type="text" name="last_name">
+                    </div>
+                    <div class="input_item">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div class="input_item">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="input_item">
+                        <label for="conf_password">Confirm Password:</label>
+                        <input type="password" name="conf_password">
+                    </div>
+                    <input class="input_item" type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+        <div id="login_col">
+            <form action="login" method="post">
+                {% csrf_token %}
+                <h1>Login</h1>
+                <div id="inputs_container">
+                    <div class="input_item">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div class="input_item">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                    </div>
+                    <input class="input_item" type="submit" value="Login">
+                </div>
+            </form>
+        </div>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li class="error_msg" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
